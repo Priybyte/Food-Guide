@@ -8,6 +8,7 @@ export const Route = createFileRoute('/products/$id')({
 interface Product {
   id: number;
   name: string;
+  brand: string | null; // Added brand
   category: string;
   ingredients: string[] | string;
   harmfulnessScore: number;
@@ -19,7 +20,6 @@ function ProductDetailScreen() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Step 3: Connecting Frontend to Backend API with error handling and loading states
   useEffect(() => {
     async function fetchProductDetail() {
       setLoading(true);
@@ -88,13 +88,19 @@ function ProductDetailScreen() {
               <h1 className="text-3xl font-bold text-slate-100 mt-1">{product.name}</h1>
             </div>
             <span className="bg-emerald-500/10 text-emerald-400 text-xs px-3 py-1.5 rounded-full border border-emerald-500/20 font-medium">
-              Score: {product.harmfulnessScore}
+              Score: {product.harmfulnessScore || 'N/A'}
             </span>
           </div>
 
-          <div className="border-t border-slate-800 pt-4 space-y-2">
-            <h2 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">Category</h2>
-            <p className="text-slate-200">{product.category}</p>
+          <div className="grid grid-cols-2 gap-4 border-t border-slate-800 pt-4">
+            <div>
+              <h2 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">Brand</h2>
+              <p className="text-slate-200 mt-1">{product.brand || 'N/A'}</p>
+            </div>
+            <div>
+              <h2 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">Category</h2>
+              <p className="text-slate-200 mt-1">{product.category || 'N/A'}</p>
+            </div>
           </div>
 
           <div className="border-t border-slate-800 pt-4 space-y-3">

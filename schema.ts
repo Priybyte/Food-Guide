@@ -3,6 +3,7 @@ import { pgTable, serial, text, vector } from 'drizzle-orm/pg-core';
 export const products = pgTable('products', {
   id: serial('id').primaryKey(),
   name: text('name').notNull(),
+  brand: text('brand'),
   category: text('category'),
   ingredients: text('ingredients'),
   harmfulnessScore: text('harmfulness_score'),
