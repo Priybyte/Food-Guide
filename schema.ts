@@ -1,5 +1,4 @@
-import { pgTable, serial, text } from 'drizzle-orm/pg-core';
-import { vector } from 'drizzle-orm/pg-vector';
+import { pgTable, serial, text, vector } from 'drizzle-orm/pg-core';
 
 export const products = pgTable('products', {
   id: serial('id').primaryKey(),
@@ -7,6 +6,6 @@ export const products = pgTable('products', {
   category: text('category'),
   ingredients: text('ingredients'),
   harmfulnessScore: text('harmfulness_score'),
-  // Vector column for embeddings (e.g., 1536 dimensions for AI features)
+  // Vector column for AI embeddings
   embedding: vector('embedding', { dimensions: 1536 }),
 });
